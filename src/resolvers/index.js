@@ -31,7 +31,10 @@ resolver.define('generateBrief', async ({ payload = {}, context }) => {
 
   // Resolve the project through Jira, so the name and source links come from
   // the actual site instead of an arbitrary URL supplied by the client.
-  const jiraProject = await readJira(route`/rest/api/3/project/${projectRef}`);
+  const [jiraProject, serverInfo] = await Promise.all([
+    readJira(route`/rest/api/3/project/${projectRef}`),
+    readJira(route`/rest/api/3/serverInfo`)
+  ]);
   const options = validateOptions({
     projectKey: jiraProject.key,
     hours: payload.hours ?? 24,
@@ -46,7 +49,9 @@ resolver.define('generateBrief', async ({ payload = {}, context }) => {
     options
   );
   const brief = compileBrief(issues, options, { truncated });
-  const siteUrl = new URL(jiraProject.self).origin;
+  // Forge can return API-gateway URLs in a resource's `self` field. The
+  // site's baseUrl is the browser-facing origin required by /browse links.
+  const siteUrl = new URL(serverInfo.baseUrl).origin;
   const markdown = toMarkdown(brief, siteUrl);
 
   // No issue data or brief is saved to Forge storage or sent to another service.
