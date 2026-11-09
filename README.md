@@ -39,7 +39,7 @@ Open a Jira project and choose Standup Compass in the project's Apps navigation.
 
 ## Verification status
 
-Ten local domain and pagination tests passed using synthetic fixtures. Forge lint passed. Both development and production versions were deployed to Forge and installed into Jira on an Atlassian demo site. The Jira-hosted app generated a briefing for a company-managed software project, correctly showed the 200-issue coverage limit, and displayed its next-up issue table. It also generated a briefing in a new team-managed software project after adding the app to project navigation. Further feature-by-feature UI verification is in progress; no adoption or time-saving measurements have been made.
+Ten local domain and pagination tests passed using synthetic fixtures. Forge lint passed. Both development and production versions were deployed to Forge and installed into Jira on an Atlassian demo site. The Jira-hosted app generated a briefing for a company-managed software project, correctly showed the 200-issue coverage limit, and displayed its next-up issue table. It also generated a briefing in a new team-managed software project after adding the app to project navigation. In the production app, five explicitly synthetic tasks verified one recently completed task, two active tasks, an exact blocker label, an overdue/unassigned risk with both reasons, a next-up task, a working source issue link, a seven-day completion-window refresh, and Markdown containing the same items and evidence. No adoption or time-saving measurements have been made.
 
 See [JUDGING.md](JUDGING.md) for production installation and testing instructions.
 
