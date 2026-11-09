@@ -1,0 +1,23 @@
+modules:
+  jira:projectPage:
+    - key: standup-compass-project-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Standup Compass
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+permissions:
+  scopes:
+    - read:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/1f03b510-6140-46cb-a3bf-bdf590bd1e02
